@@ -20,6 +20,23 @@ app.get("/tico", (req, res) => {
     res.send("teco");
 });
 
+app.get("/pokemons", (req, res) => {
+    const pokemons = [
+        { ordem: 1,  nome: "Caterpie",   pokedex: 10 },
+        { ordem: 2,  nome: "Pidgeotto",  pokedex: 17 },
+        { ordem: 3,  nome: "Bulbasaur",  pokedex: 1 },
+        { ordem: 4,  nome: "Charmander", pokedex: 4 },
+        { ordem: 5,  nome: "Squirtle",   pokedex: 7 },
+        { ordem: 6,  nome: "Krabby",     pokedex: 98 },
+        { ordem: 7,  nome: "Primeape",   pokedex: 57 },
+        { ordem: 8,  nome: "Tauros",     pokedex: 128 },
+        { ordem: 9,  nome: "Muk",        pokedex: 89 },
+        { ordem: 10, nome: "Lapras",     pokedex: 131 }
+    ];
+
+    res.json(pokemons);
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 const html = `
