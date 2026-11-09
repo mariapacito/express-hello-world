@@ -47,6 +47,10 @@ app.post("/series", (req, res) => {
     res.json(series);
 });
 
+app.get("/erro", (req, res) => {
+    throw new Error("Erro simulado: bug em produção (exercício 5)");
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 const html = `
