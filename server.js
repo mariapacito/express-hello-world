@@ -51,6 +51,34 @@ app.get("/erro", (req, res) => {
     throw new Error("Erro simulado: bug em produção (exercício 5)");
 });
 
+app.get("/pokemon-externo", async (req, res) => {
+    try {
+        const resposta = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu");
+
+        if (!resposta.ok) {
+            return res.status(502).json({
+                erro: "A API externa respondeu com problema",
+                statusExterno: resposta.status
+            });
+        }
+
+        const dados = await resposta.json();
+
+        res.json({
+            nome: dados.name,
+            numero: dados.id,
+            altura: dados.height,
+            peso: dados.weight,
+            tipos: dados.types.map((t) => t.type.name)
+        });
+    } catch (erro) {
+        console.error("Falha ao acessar a API externa:", erro.message);
+        res.status(502).json({
+            erro: "Não foi possível acessar a API externa. Tente novamente mais tarde."
+        });
+    }
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 const html = `
